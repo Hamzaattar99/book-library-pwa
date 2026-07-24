@@ -1,0 +1,401 @@
+/* ==========================================
+   1. المتغيرات والتنسيقات العامة (Dark Gold Theme)
+   ========================================== */
+:root {
+    --bg-dark: #121824;          /* خلفية الموقع الداكنة */
+    --card-bg: #1a2232;          /* خلفية البطاقات والنوافذ */
+    --accent-gold: #d4af37;      /* اللون الذهبي الملكي */
+    --gold-hover: #f39c12;       /* التوهج الذهبي */
+    --text-light: #e2e8f0;       /* لون النصوص الرئيسية */
+    --text-muted: #94a3b8;        /* لون النصوص الفرعية */
+    --border-color: #2a3548;     /* لون الحدود الناعمة */
+    --success-green: #2ecc71;    /* متصل */
+    --danger-red: #e74c3c;       /* غير متصل */
+    --border-radius: 10px;
+    --transition: all 0.3s ease;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    direction: rtl;
+    line-height: 1.6;
+}
+
+/* ==========================================
+   2. الشريط العلوي (Header)
+   ========================================== */
+.main-header {
+    background-color: rgba(18, 24, 36, 0.95);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(8px);
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-icon {
+    font-size: 1.8rem;
+}
+
+.brand h1 {
+    font-size: 1.4rem;
+    color: var(--text-light);
+}
+
+.brand h1 span {
+    color: var(--accent-gold);
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: var(--transition);
+}
+
+.nav-links a.active, .nav-links a:hover {
+    color: var(--accent-gold);
+}
+
+.badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.badge.online { background: rgba(46, 204, 113, 0.2); color: var(--success-green); border: 1px solid var(--success-green); }
+.badge.offline { background: rgba(231, 76, 60, 0.2); color: var(--danger-red); border: 1px solid var(--danger-red); }
+
+/* ==========================================
+   3. قسم الهيرو بخلفية المكتبة (Hero Section)
+   ========================================== */
+.hero-section {
+    background: linear-gradient(rgba(18, 24, 36, 0.85), rgba(18, 24, 36, 0.95)), 
+                url('https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+    padding: 4rem 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.hero-overlay {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.hero-overlay h2 {
+    font-size: 2.2rem;
+    color: var(--accent-gold);
+    margin-bottom: 10px;
+}
+
+.hero-overlay p {
+    color: var(--text-muted);
+    margin-bottom: 25px;
+    font-size: 1.05rem;
+}
+
+.hero-search-box {
+    background: var(--card-bg);
+    border: 1px solid var(--accent-gold);
+    border-radius: 30px;
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.15);
+}
+
+.hero-search-box input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-light);
+    width: 100%;
+    font-size: 1rem;
+}
+
+/* ==========================================
+   4. المحتوى الرئيسي والفئات المميزة
+   ========================================== */
+.main-content {
+    max-width: 1200px;
+    margin: 2.5rem auto;
+    padding: 0 1.5rem;
+}
+
+.section-title {
+    color: var(--accent-gold);
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+    position: relative;
+    padding-right: 12px;
+}
+
+.section-title::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 15%;
+    height: 70%;
+    width: 4px;
+    background: var(--accent-gold);
+    border-radius: 2px;
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
+    margin-bottom: 3rem;
+}
+
+.category-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.category-card .cat-icon { font-size: 1.5rem; }
+.category-card span { font-size: 0.9rem; font-weight: 600; color: var(--text-light); }
+
+.category-card:hover, .category-card.active {
+    border-color: var(--accent-gold);
+    background: rgba(212, 175, 55, 0.08);
+    transform: translateY(-3px);
+}
+
+/* ==========================================
+   5. بطاقات الكتب الذهبية مع صور الخلفيات Real Images
+   ========================================== */
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 25px;
+}
+
+.book-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+
+.book-card:hover {
+    border-color: var(--accent-gold);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+/* التنسيق العام لغلاف الكتاب */
+.book-cover {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 12px;
+    color: white;
+    position: relative;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
+    background-size: cover;
+    background-position: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* 1. كتاب مقدمة ابن خلدون (خلفية تاريخية) */
+.history-bg { 
+    background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.75)), 
+                url('https://images.unsplash.com/photo-1461360370896-922624d12aa1?auto=format&fit=crop&w=500&q=80') center/cover; 
+}
+
+/* 2. كتاب فن الحرب (خلفية استراتيجية) */
+.self-bg { 
+    background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.75)), 
+                url('https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=500&q=80') center/cover; 
+}
+
+/* 3. كتاب رحلة العقل (خلفية تكنولوجيا وعلم) */
+.tech-bg { 
+    background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.75)), 
+                url('https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&w=500&q=80') center/cover; 
+}
+
+/* 4. كتاب واحة الأدب (خلفية أدب وطبيعة) */
+.literature-bg { 
+    background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.75)), 
+                url('https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=500&q=80') center/cover; 
+}
+
+.book-cover .stars { color: #f1c40f; font-size: 0.85rem; }
+.book-cover .cover-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--accent-gold);
+}
+
+.book-details {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+}
+
+.book-details h4 {
+    font-size: 1.05rem;
+    color: var(--text-light);
+    margin-bottom: 4px;
+}
+
+.book-details .author {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 15px;
+}
+
+.btn-details {
+    background: transparent;
+    border: 1px solid var(--accent-gold);
+    color: var(--accent-gold);
+    padding: 8px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transition);
+    width: 100%;
+}
+
+.btn-details:hover {
+    background: var(--accent-gold);
+    color: var(--bg-dark);
+}
+
+/* ==========================================
+   6. النافذة المنبثقة للقارئ (Reader Modal)
+   ========================================== */
+.reader-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal-content {
+    background: var(--card-bg);
+    border: 1px solid var(--accent-gold);
+    border-radius: var(--border-radius);
+    width: 100%;
+    max-width: 650px;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.modal-header {
+    background: rgba(212, 175, 55, 0.1);
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal-header h2 { color: var(--accent-gold); font-size: 1.2rem; }
+
+.close-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+.modal-body {
+    padding: 1.5rem;
+    overflow-y: auto;
+}
+
+.reader-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+}
+
+.offline-tag { color: var(--success-green); }
+.gold-hr { border: 0; height: 1px; background: var(--border-color); margin: 15px 0; }
+
+.book-text-body {
+    font-size: 1rem;
+    line-height: 1.9;
+    color: var(--text-light);
+    white-space: pre-line;
+}
+
+/* ==========================================
+   7. الفوتر والتجاوب
+   ========================================== */
+.main-footer {
+    text-align: center;
+    padding: 2rem 0;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-top: 4rem;
+}
+
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hero-overlay h2 { font-size: 1.6rem; }
+}

@@ -1,0 +1,17 @@
+{
+  "short_name": "الرؤية",
+  "name": "مكتبة الرؤية الرقمية",
+  "icons": [
+    {
+      "src": "app-icon.png",
+      "sizes": "192x192 512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "./index.html",
+  "background_color": "#121824",
+  "theme_color": "#121824",
+  "display": "standalone",
+  "orientation": "portrait"
+}

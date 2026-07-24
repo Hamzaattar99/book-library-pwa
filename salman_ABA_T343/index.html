@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>مكتبة الرؤية الرقمية</title>
+    
+    <link rel="icon" type="image/png" href="app-icon.png">
+    
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- الشريط العلوي (Header) -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="brand">
+                <span class="logo-icon">📖</span>
+                <h1>مكتبة <span>الرؤية</span></h1>
+            </div>
+            
+            <nav class="nav-links">
+                <a href="index.html" class="active">تصفح الكتب</a>
+                <a href="about.html">عن المكتبة</a>
+            </nav>
+
+            <div class="header-actions">
+                <div id="status-badge" class="badge online">أنت متصل</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- قسم الهيرو (Hero Section) بخلفية المكتبة وبحث هادئ -->
+    <section class="hero-section">
+        <div class="hero-overlay">
+            <h2>مرحباً بك في مكتبة الرؤية</h2>
+            <p>اكتشف عالم المعرفة، الأدب، والثقافة بين يديك.. واقرأ أوفلاين في أي وقت.</p>
+            
+            <!-- شريط البحث الرئيسي -->
+            <div class="hero-search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="ابحث عن كتاب، مؤلف، أو موضوع...">
+            </div>
+        </div>
+    </section>
+
+    <main class="main-content">
+
+        <!-- قسم الفئات المميزة (Featured Categories) -->
+        <section class="categories-section">
+            <h3 class="section-title">الفئات المميزة</h3>
+            <div class="categories-grid">
+                <div class="category-card active" data-category="all">
+                    <span class="cat-icon">📚</span>
+                    <span>كل الكتب</span>
+                </div>
+                <div class="category-card" data-category="self">
+                    <span class="cat-icon">🧠</span>
+                    <span>تطوير الذات</span>
+                </div>
+                <div class="category-card" data-category="tech">
+                    <span class="cat-icon">⚛️</span>
+                    <span>علوم وتكنولوجيا</span>
+                </div>
+                <div class="category-card" data-category="history">
+                    <span class="cat-icon">🏛️</span>
+                    <span>تاريخ وحضارة</span>
+                </div>
+                <div class="category-card" data-category="literature">
+                    <span class="cat-icon">📖</span>
+                    <span>أدب وروايات</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم أحدث الإصدارات (الكتب الاربعة) -->
+        <section class="books-section">
+            <h3 class="section-title">أحدث الإصدارات</h3>
+            
+            <div class="books-grid" id="booksGrid">
+                
+                <!-- الكتاب 1 -->
+                <div class="book-card" data-category="history" data-id="book1">
+                    <div class="book-cover history-bg">
+                        <span class="stars">★★★★★</span>
+                        <div class="cover-text">مقدمة ابن خلدون</div>
+                    </div>
+                    <div class="book-details">
+                        <h4>مقدمة ابن خلدون</h4>
+                        <p class="author">ابن خلدون</p>
+                        <button class="btn-details read-book-btn" data-book="book1">قراءة الآن</button>
+                    </div>
+                </div>
+
+                <!-- الكتاب 2 -->
+                <div class="book-card" data-category="self" data-id="book2">
+                    <div class="book-cover self-bg">
+                        <span class="stars">★★★★☆</span>
+                        <div class="cover-text">فن الحرب</div>
+                    </div>
+                    <div class="book-details">
+                        <h4>فن الحرب</h4>
+                        <p class="author">سون تزو</p>
+                        <button class="btn-details read-book-btn" data-book="book2">قراءة الآن</button>
+                    </div>
+                </div>
+
+                <!-- الكتاب 3 -->
+                <div class="book-card" data-category="tech" data-id="book3">
+                    <div class="book-cover tech-bg">
+                        <span class="stars">★★★★★</span>
+                        <div class="cover-text">رحلة العقل</div>
+                    </div>
+                    <div class="book-details">
+                        <h4>رحلة العقل</h4>
+                        <p class="author">أحمد حامد</p>
+                        <button class="btn-details read-book-btn" data-book="book3">قراءة الآن</button>
+                    </div>
+                </div>
+
+                <!-- الكتاب 4 -->
+                <div class="book-card" data-category="literature" data-id="book4">
+                    <div class="book-cover literature-bg">
+                        <span class="stars">★★★★☆</span>
+                        <div class="cover-text">واحة الأدب</div>
+                    </div>
+                    <div class="book-details">
+                        <h4>واحة الأدب</h4>
+                        <p class="author">فاطمة علي</p>
+                        <button class="btn-details read-book-btn" data-book="book4">قراءة الآن</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- النافذة المنبثقة للقارئ (Modal Reader) -->
+        <div id="bookReaderModal" class="reader-modal" style="display: none;">
+            <div class="modal-content">
+                <header class="modal-header">
+                    <h2 id="modalBookTitle">عنوان الكتاب</h2>
+                    <button id="closeReaderBtn" class="close-btn">&times;</button>
+                </header>
+                <div class="modal-body">
+                    <div class="reader-meta">
+                        <span id="modalBookAuthor">المؤلف: --</span>
+                        <span class="offline-tag">🔒 متاح بدون إنترنت</span>
+                    </div>
+                    <hr class="gold-hr">
+                    <div id="modalBookContent" class="book-text-body">
+                        جاري تحميل الكتاب...
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- الفوتر الأنيق -->
+    <footer class="main-footer">
+        <p>سلمان - مكتبة الرؤية الرقمية</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
