@@ -1,0 +1,23 @@
+{
+    "name": "معرض الكتاب - بشير",
+    "short_name": "معرض الكتاب",
+    "description": "تطبيق معرض الكتاب يعمل بدون إنترنت",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "background_color": "#F2F7F3",
+    "theme_color": "#2E5D3A",
+    "icons": [
+   {
+            "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='30' fill='%232E5D3A'/%3E%3Crect x='28' y='24' width='136' height='150' rx='8' fill='%23F5DEB3'/%3E%3Cline x1='96' y1='24' x2='96' y2='174' stroke='%232E5D3A' stroke-width='4'/%3E%3Ctext x='52' y='90' font-family='Arial' font-size='32' fill='%232E5D3A'%3E📚%3C/text%3E%3C/svg%3E",
+            "sizes": "192x192",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='60' fill='%232E5D3A'/%3E%3Crect x='60' y='50' width='392' height='420' rx='12' fill='%23F5DEB3'/%3E%3Cline x1='256' y1='50' x2='256' y2='470' stroke='%232E5D3A' stroke-width='8'/%3E%3Ctext x='140' y='220' font-family='Arial' font-size='70' fill='%232E5D3A'%3E📚%3C/text%3E%3C/svg%3E",
+            "sizes": "512x512",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        }
+    ]
+}
