@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2E5D3A">
+    <link rel="manifest" href="manifest.json">
+    <title>❤️ المفضلة | معرض الكتاب</title>
+    <style>
+        :root {
+            --primary: #2E5D3A;
+            --bg: #F2F7F3;
+            --card-bg: #FFFFFF;
+            --text: #1E2F23;
+            --text-light: #4A5D4E;
+            --accent: #C59B27;
+            --heart: #E74C3C;
+            --shadow: 0 4px 20px rgba(46, 93, 58, 0.1);
+            --radius: 16px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding-bottom: 20px;
+        }
+        .header {
+            background: linear-gradient(135deg, var(--heart), #c0392b);
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .header h1 { font-size: 1.5rem; }
+        .back-link {
+            color: #fff;
+            text-decoration: none;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 16px;
+            padding: 20px;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+        .book-card {
+            background: #fff;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            position: relative;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .book-cover {
+            height: 140px;
+            background: linear-gradient(135deg, var(--primary), #4A7C59);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #fff;
+        }
+        .book-info { padding: 12px; }
+        .book-title { font-weight: 700; font-size: 0.95rem; }
+        .book-author { font-size: 0.8rem; color: var(--text-light); }
+        .remove-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+        .remove-btn:hover { background: var(--heart); color: #fff; }
+        .empty-state { text-align: center; padding: 60px 20px; grid-column: 1/-1; }
+        .footer { text-align: center; padding: 16px; color: #888; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>❤️ المفضلة</h1>
+        <a href="index.html" class="back-link">📚 العودة للمعرض</a>
+    </div>
+
+    <div class="books-grid" id="favGrid"></div>
+
+    <div class="footer">
+        <p>📖 معرض الكتاب | <strong>بشير</strong> | تطبيق ويب تقدمي</p>
+    </div>
+
+    <script>
+        const defaultBooks = [
+            { id: 1, title: 'Muhammad Omar Text', author: 'Muhammad Omar', category: 'أدب', emoji: '📖' },
+            { id: 2, title: 'ألف ليلة وليلة', author: 'مجهول', category: 'أدب', emoji: '🌙' },
+            { id: 3, title: 'العقد الفريد', author: 'ابن عبد ربه', category: 'تاريخ', emoji: '📜' },
+            { id: 4, title: 'كليلة ودمنة', author: 'ابن المقفع', category: 'فلسفة', emoji: '🦁' },
+            { id: 5, title: 'البخلاء', author: 'الجاحظ', category: 'أدب', emoji: '😂' },
+            { id: 6, title: 'مقدمة ابن خلدون', author: 'ابن خلدون', category: 'تاريخ', emoji: '🏛️' }
+        ];
+
+        if (!localStorage.getItem('bookCatalog')) {
+            localStorage.setItem('bookCatalog', JSON.stringify(defaultBooks));
+        }
+        if (!localStorage.getItem('favorites')) {
+            localStorage.setItem('favorites', JSON.stringify([]));
+        }
+
+        function getCatalog() { return JSON.parse(localStorage.getItem('bookCatalog')); }
+        function getFavorites() { return JSON.parse(localStorage.getItem('favorites')); }
+
+        function removeFavorite(bookId) {
+            let favs = getFavorites().filter(id => id !== bookId);
+            localStorage.setItem('favorites', JSON.stringify(favs));
+            renderFavorites();
+        }
+
+        function renderFavorites() {
+            const grid = document.getElementById('favGrid');
+            const catalog = getCatalog();
+            const favs = getFavorites();
+            if (favs.length === 0) {
+                grid.innerHTML = '<div class="empty-state">💔 لا توجد كتب في المفضلة<br><a href="index.html">تصفح المعرض</a></div>';
+                return;
+            }
+            const favBooks = catalog.filter(b => favs.includes(b.id));
+            grid.innerHTML = favBooks.map(book => `
+                <div class="book-card">
+                    <div class="book-cover">
+                        <span>${book.emoji || '📘'}</span>
+                    </div>
+                    <button class="remove-btn" data-id="${book.id}">🗑️</button>
+                    <div class="book-info">
+                        <div class="book-title">${book.title}</div>
+                        <div class="book-author">✍️ ${book.author}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            document.querySelectorAll('.remove-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const id = parseInt(this.dataset.id);
+                    removeFavorite(id);
+                });
+            });
+        }
+
+        renderFavorites();
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js', { scope: './' })
+                .then(reg => console.log('✅ SW مفضلة مسجل'))
+                .catch(err => console.error(err));
+        }
+    </script>
+</body>
+</html>
