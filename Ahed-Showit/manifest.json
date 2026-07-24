@@ -1,0 +1,27 @@
+{
+  "name": "معرض الكتب",
+  "short_name": "معرض الكتب",
+  "description": "تطبيق بسيط لعرض وإضافة الكتب المفضلة لديك",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f4f2fb",
+  "theme_color": "#4a3f8f",
+  "lang": "ar",
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "icons/books_1.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/books_5.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
