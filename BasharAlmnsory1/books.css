@@ -1,0 +1,15 @@
+ججججججججججججججججججججججججججججججججججججججججججططbody {
+    background-color: #F5EFE6;
+    background-image: radial-gradient(#E8DFD0 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+
+.page-transition {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-header {
+    background: rgba(46, 26, 15, 0.9);
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid #C59A6F;
+}
