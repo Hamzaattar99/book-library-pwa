@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معرض الكتاب</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- ربط ملف الـ Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <!-- لون شريط العنوان في المتصفح للهواتف -->
+    <meta name="theme-color" content="#2c3e50">
+</head>
+<body>
+
+    <header>
+        <h1>📚 معرض الكتاب</h1>
+        <p>تطبيق PWA بسيط لعرض الكتب</p>
+    </header>
+
+    <main>
+        <!-- قسم إضافة كتاب جديد (Demo) -->
+        <section class="add-book-section">
+            <button id="add-btn">➕ إضافة كتاب جديد (Demo)</button>
+        </section>
+
+        <!-- قسم عرض كروت الكتب -->
+        <section class="books-container" id="books-container">
+            <!-- الكروت الافتراضية للكتب -->
+            <div class="book-card">
+                <div class="book-icon">📖</div>
+                <h3>كتاب مقدمة في HTML</h3>
+                <p>تعلم أساسيات هيكلة صفحات الويب بكل سهولة.</p>
+            </div>
+            <div class="book-card">
+                <div class="book-icon">🎨</div>
+                <h3>كتاب أساسيات CSS</h3>
+                <p>دليلك الشامل لتنسيق وتصميم المواقع بشكل جذاب.</p>
+            </div>
+            <div class="book-card">
+                <div class="book-icon">⚡</div>
+                <h3>كتاب احتراف JS</h3>
+                <p>أسرار وتقنيات لغة الجافاسكريبت لبناء مواقع تفاعلية.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- ربط ملفات الجافاسكريبت -->
+    <script src="app.js"></script>
+</body>
+</html>

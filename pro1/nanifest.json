@@ -1,0 +1,18 @@
+{
+    "name": "معرض الكتاب التجريبي",
+    "short_name": "معرض الكتاب",
+    "description": "تطبيق بسيط لعرض الكتب يعمل بدون اتصال بالإنترنت",
+    "start_url": "index.html",
+    "display": "standalone",
+    "background_color": "#f5f6fa",
+    "theme-color": "#2c3e50",
+    "orientation": "portrait-primary",
+    "icons": [
+      {
+        "src": "https://cdn-icons-png.flaticon.com/512/2232/2232688.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+  }
+  
