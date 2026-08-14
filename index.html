@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="معرض الكتب - اكتشف عالماً من الكتب الرائعة وأضف مجموعتك الخاصة" />
+  <meta name="theme-color" content="#7c3aed" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="معرض الكتب" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="معرض الكتب" />
+  <meta property="og:description" content="تطبيق لإدارة وعرض مجموعتك من الكتب" />
+  <meta property="og:type" content="website" />
+
+  <title>معرض الكتب 📚</title>
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="./manifest.json" />
+
+  <!-- Icons -->
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png" />
+  <link rel="apple-touch-icon" href="./icon-192.png" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════
+       HEADER
+  ═══════════════════════════════════ -->
+  <header class="app-header" role="banner">
+    <div class="header-inner">
+      <!-- Logo -->
+      <div class="logo">
+        <span class="logo-icon" role="img" aria-label="كتب">📚</span>
+        <div class="logo-text">
+          <span class="logo-title">معرض الكتب</span>
+          <span class="logo-subtitle">مكتبتك الرقمية الشخصية</span>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="header-actions">
+        <!-- Offline Badge -->
+        <div class="offline-badge" id="offlineBadge" role="status" aria-live="polite">
+          <span class="offline-dot"></span>
+          <span>غير متصل</span>
+        </div>
+
+        <!-- Notifications Toggle -->
+        <button class="btn-notify" id="notifyBtn" onclick="toggleNotifications()" aria-label="تفعيل الإشعارات" title="تفعيل الإشعارات">
+          <span class="btn-notify-icon" id="notifyIcon">🔕</span>
+        </button>
+
+        <!-- Install App Button -->
+        <button class="btn-install" id="installBtn" onclick="installApp()" aria-label="تنزيل التطبيق" title="تنزيل التطبيق">
+          <span class="btn-install-icon">📲</span>
+          <span>تنزيل التطبيق</span>
+        </button>
+
+        <!-- Add Book Button -->
+        <button class="btn-add" id="addBookBtn" onclick="openModal()" aria-label="إضافة كتاب جديد">
+          <span class="btn-add-icon">＋</span>
+          <span>إضافة كتاب</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════
+       MAIN CONTENT
+  ═══════════════════════════════════ -->
+  <main class="main-content" role="main">
+
+    <!-- Stats & Filters -->
+    <div class="stats-bar">
+      <div class="stats-info">
+        <p class="books-count">عدد الكتب: <span id="booksCount">0</span></p>
+      </div>
+      <div class="filter-tabs" role="tablist" aria-label="تصفية الكتب">
+        <button class="filter-tab active" data-filter="الكل" role="tab" aria-selected="true">الكل</button>
+        <button class="filter-tab" data-filter="رواية" role="tab" aria-selected="false">رواية</button>
+        <button class="filter-tab" data-filter="أدب" role="tab" aria-selected="false">أدب</button>
+        <button class="filter-tab" data-filter="خيال علمي" role="tab" aria-selected="false">خيال علمي</button>
+        <button class="filter-tab" data-filter="تاريخ" role="tab" aria-selected="false">تاريخ</button>
+        <button class="filter-tab" data-filter="تطوير ذات" role="tab" aria-selected="false">تطوير ذات</button>
+      </div>
+    </div>
+
+    <!-- Books Grid -->
+    <section class="books-grid" id="booksGrid" role="region" aria-label="قائمة الكتب">
+      <!-- Cards rendered by JS -->
+    </section>
+
+    <!-- Empty State -->
+    <div class="empty-state" id="emptyState" aria-live="polite">
+      <span class="empty-icon" role="img" aria-label="لا يوجد كتب">📭</span>
+      <h2 class="empty-title">لا توجد كتب في هذه الفئة</h2>
+      <p class="empty-text">اضغط على زر "إضافة كتاب" لإضافة كتابك الأول إلى مكتبتك الرقمية!</p>
+    </div>
+
+  </main>
+
+  <!-- ═══════════════════════════════════
+       ADD BOOK MODAL
+  ═══════════════════════════════════ -->
+  <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modalTitle">📖 إضافة كتاب جديد</h2>
+        <button class="modal-close" onclick="closeModal()" aria-label="إغلاق">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <form id="addBookForm" novalidate>
+
+          <!-- Book Title -->
+          <div class="form-group">
+            <label class="form-label" for="bookTitle">
+              عنوان الكتاب <span>*</span>
+            </label>
+            <input
+              type="text"
+              id="bookTitle"
+              class="form-input"
+              placeholder="أدخل عنوان الكتاب..."
+              maxlength="100"
+              required
+            />
+          </div>
+
+          <!-- Author -->
+          <div class="form-group">
+            <label class="form-label" for="bookAuthor">
+              اسم المؤلف <span>*</span>
+            </label>
+            <input
+              type="text"
+              id="bookAuthor"
+              class="form-input"
+              placeholder="اسم الكاتب أو المؤلف..."
+              maxlength="80"
+              required
+            />
+          </div>
+
+          <!-- Description -->
+          <div class="form-group">
+            <label class="form-label" for="bookDesc">وصف الكتاب</label>
+            <textarea
+              id="bookDesc"
+              class="form-textarea"
+              placeholder="اكتب وصفاً مختصراً عن الكتاب..."
+              maxlength="300"
+            ></textarea>
+          </div>
+
+          <!-- Category -->
+          <div class="form-group">
+            <label class="form-label" for="bookCategory">التصنيف</label>
+            <select id="bookCategory" class="form-select">
+              <option value="رواية">📖 رواية</option>
+              <option value="أدب">✍️ أدب</option>
+              <option value="خيال علمي">🔭 خيال علمي</option>
+              <option value="تاريخ">🗺️ تاريخ</option>
+              <option value="تطوير ذات">💡 تطوير ذات</option>
+              <option value="فلسفة">🧠 فلسفة</option>
+              <option value="علوم">🔬 علوم</option>
+              <option value="أخرى">📚 أخرى</option>
+            </select>
+          </div>
+
+          <!-- Year & Pages & Rating -->
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="bookYear">سنة النشر</label>
+              <input
+                type="number"
+                id="bookYear"
+                class="form-input"
+                placeholder="2024"
+                min="500"
+                max="2100"
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="bookPages">عدد الصفحات</label>
+              <input
+                type="number"
+                id="bookPages"
+                class="form-input"
+                placeholder="350"
+                min="1"
+                max="9999"
+              />
+            </div>
+          </div>
+
+          <!-- Rating -->
+          <div class="form-group">
+            <label class="form-label" for="bookRating">التقييم (من 5)</label>
+            <input
+              type="number"
+              id="bookRating"
+              class="form-input"
+              placeholder="4.5"
+              min="0"
+              max="5"
+              step="0.1"
+            />
+          </div>
+
+          <!-- Emoji Picker -->
+          <div class="form-group">
+            <label class="form-label">أيقونة الكتاب</label>
+            <div class="emoji-grid" id="emojiGrid" role="group" aria-label="اختر أيقونة">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+
+          <!-- Gradient Color -->
+          <div class="form-group">
+            <label class="form-label">لون الغلاف</label>
+            <div id="gradientPicker" style="display:flex;flex-wrap:wrap;gap:8px;" role="group" aria-label="اختر لون الغلاف">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+
+          <!-- Submit -->
+          <button type="submit" class="btn-submit" id="submitBtn">
+            ✅ إضافة الكتاب إلى المعرض
+          </button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       TOAST NOTIFICATION
+  ═══════════════════════════════════ -->
+  <div class="toast" id="toast" role="alert" aria-live="polite"></div>
+
+  <!-- ═══════════════════════════════════
+       SCRIPTS
+  ═══════════════════════════════════ -->
+  <script src="./app.js"></script>
+
+</body>
+</html>

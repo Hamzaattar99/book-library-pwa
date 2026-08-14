@@ -1,0 +1,64 @@
+{
+  "name": "معرض الكتب",
+  "short_name": "معرض الكتب",
+  "description": "تطبيق معرض الكتب - اكتشف عالماً من الكتب الرائعة",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0f0c29",
+  "theme_color": "#7c3aed",
+  "orientation": "portrait-primary",
+  "lang": "ar",
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-192-maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": ["books", "education", "entertainment"],
+  "screenshots": [
+    {
+      "src": "screenshot-wide.png",
+      "sizes": "1280x800",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "معرض الكتب على شاشة الحاسوب"
+    },
+    {
+      "src": "screenshot-narrow.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "معرض الكتب على شاشة الجوال"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "إضافة كتاب",
+      "short_name": "إضافة",
+      "description": "أضف كتاباً جديداً إلى معرضك",
+      "url": "./index.html#add",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
