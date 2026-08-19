@@ -1,3 +1,47 @@
+// تهيئة Firebase Client
+const firebaseConfig = {
+    apiKey: "AIzaSyA54YWCxlz6LYFCdwP_yFNY0dsX5VsHErI",
+    authDomain: "books-5c9d5.firebaseapp.com",
+    projectId: "books-5c9d5",
+    storageBucket: "books-5c9d5.firebasestorage.app",
+    messagingSenderId: "191558442951",
+    appId: "1:191558442951:web:6deae8c5a413f9b080c3e2"
+};
+
+firebase.initializeApp(firebaseConfig);
+const messaging = firebase.messaging();
+
+// طلب إذن الإشعارات واستخراج FCM Token بعد التأكد من جاهزية الـ Service Worker
+async function requestNotificationPermission() {
+    try {
+        const permission = await Notification.requestPermission();
+        if (permission === 'granted') {
+            // الانتظار حتى يصبح الـ Service Worker نشطاً بالكامل في المتصفح
+            const registration = await navigator.serviceWorker.ready;
+
+            const currentToken = await messaging.getToken({
+                serviceWorkerRegistration: registration,
+                vapidKey: 'BPrq0yFOJCOFwlAdCOuG1522oSZuDthRvyXH5sVYDg5fkz9_xnYNwOGeeD-GPYS5maoWeNyBdbNw1hFX3ssRIQw'
+            });
+
+            if (currentToken) {
+                console.log('FCM Token:', currentToken);
+            }
+        }
+    } catch (err) {
+        console.log('Token Error: ', err);
+    }
+}
+
+// استقبال الإشعارات فورياً عند تصفح الموقع
+messaging.onMessage((payload) => {
+    alert(`إشعار جديد: ${payload.notification.title}\n${payload.notification.body}`);
+});
+
+
+
+
+
 const defaultBooks = [
     { id: 1, title: "مقدمة في هندسة البرمجيات", author: "م. محمد كمال", category: "تقنية", coverType: "cover-tech", rating: 5, borrowed: false },
     { id: 2, title: "أسرار تطوير المهارات الرقمية", author: "أ. منى التميمي", category: "تطوير الذات", coverType: "cover-green", rating: 4, borrowed: false },
@@ -16,10 +60,14 @@ window.addEventListener('load', () => {
     registerServiceWorker();
 });
 
+// تسجيل الـ Service Worker
 function registerServiceWorker() {
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('sw.js')
-            .then(() => console.log("ServerWorker Active"))
+            .then(() => {
+                console.log("ServerWorker Registered");
+                requestNotificationPermission();
+            })
             .catch(err => console.log("SW Error: ", err));
     }
 }
@@ -179,6 +227,13 @@ function saveNewBook(e) {
     localStorage.setItem('my_books', JSON.stringify(books));
     renderBooks();
     resetForm();
+// تسجيل عملية المزامنة في الخلفية
+    if ('serviceWorker' in navigator && 'SyncManager' in window) {
+        navigator.serviceWorker.ready.then(reg => {
+            return reg.sync.register('sync-new-books');
+        }).catch(err => console.log('خطأ المزامنة: ', err));
+    }
+
     switchView('gallery');
 }
 

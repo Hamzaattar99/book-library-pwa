@@ -6,11 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>معرض الكتب - Livres d'Or</title>
 
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
-
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -23,7 +21,6 @@
     </script>
 
     <!-- مكتبة التنسيق Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -47,18 +44,19 @@
         }
     </script>
 
-
     <link rel="stylesheet" href="books.css">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#2E1A0F">
+
+    <!-- مكتبات Firebase Client لإدارة الإشعارات -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-messaging-compat.js"></script>
 </head>
 
 <body class="min-height-screen pb-24 text-[#2E1A0F] font-sans antialiased">
 
-
     <header class="glass-header sticky top-0 z-50 px-6 py-4 text-white shadow-2xl">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-
 
             <div class="flex items-center gap-3">
                 <div class="w-12 h-12 bg-library-accent rounded-full flex items-center justify-center text-library-dark shadow-inner transform hover:rotate-12 transition-transform duration-300 overflow-hidden">
@@ -69,7 +67,6 @@
                     <span class="font-serif text-sm italic tracking-widest text-amber-200">Livres d’Or</span>
                 </div>
             </div>
-
 
             <nav class="flex bg-black/30 p-1.5 rounded-full border border-white/10">
                 <button id="nav-gallery" onclick="switchView('gallery')" class="flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm transition-all duration-300 bg-library-accent text-library-dark shadow-md">
@@ -82,7 +79,6 @@
                 </button>
             </nav>
 
-
             <div class="relative w-full md:w-64" id="search-container">
                 <input type="text" id="search-input" onkeyup="filterBooks()" placeholder="ابحث عن عنوان أو كاتب..." class="w-full bg-white/10 text-white placeholder-amber-100/60 rounded-full py-2 px-10 border border-white/20 focus:outline-none focus:border-library-accent focus:bg-white/20 transition-all text-sm">
                 <i class="fa-solid fa-magnifying-glass absolute right-4 top-1/2 -translate-y-1/2 text-amber-200/70 text-sm"></i>
@@ -90,9 +86,7 @@
         </div>
     </header>
 
-
     <main class="max-w-6xl mx-auto px-4 py-8">
-
 
         <section id="view-gallery" class="page-transition">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
@@ -120,7 +114,6 @@
                 <h3 class="text-xl font-bold text-library-dark">عذراً، لم نجد أي كتب تطابق بحثك!</h3>
             </div>
         </section>
-
 
         <section id="view-add" class="page-transition hidden">
             <div class="mb-8">
@@ -209,8 +202,6 @@
         </section>
 
     </main>
-
-
 
     <script src="script.js"></script>
 </body>
